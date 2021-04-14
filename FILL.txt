@@ -1,0 +1,85 @@
+
+#include<bits/stdc++.h> 
+#define int long long
+#define vi vector<int>
+#define vii vector<vi>
+#define pii pair<int,int>
+#define rep(i,a,b) for(int i=a; i<b; i++)
+#define rrep(i,a,b) for(int i=a; i>=b; i--)
+#define pb(i) push_back(i)
+#define all(b) b.begin(),b.end()
+#define f first
+#define s second
+using namespace std;
+const int mod = 1e9 + 7;
+const int inf = 1e10 + 20;
+void test_case(){
+    // int k; cin>>k;
+    // double n, d; cin>>n>>d;
+    // double val = n/d;
+
+    // stringstream ss;
+    // ss<<fixed<<setprecision(k)<<val;
+    // string s,final;
+    // while(ss>>s){
+    //     final +=s;
+    // }
+
+    // int res = 0;
+    // bool ok = false;
+
+    // cout<<final<<endl;
+    // rep(i,0,final.size()){
+    //     if(final[i]=='.')
+    //         ok = true;
+    //     if(!ok) continue;
+    //     if(final[i]=='.') continue;
+    //     string ch = "";
+    //     ch += final[i];
+    //     res += stoi(ch);
+    // }
+    // cout<<res;
+
+
+    // dp recurrence 
+    // for n>=2 
+    // f(n) = f(n - 1) + f(n - 2) + g(n) + g(n) + h(n)
+    // f(n) = f(n-1) + f(n-2) + 2 * g(n -2) + h(n - 2)
+    // now g(n) = f(n) + g(n - 1)
+    // and h(n) = f(n) + h(n - 2)
+
+
+    int f[101],g[101],h[101];
+    rep(i,0,101)
+      f[i] = 0, g[i] = 0, h[i] = 0;
+
+    f[0] = f[1] = 1;
+    g[0] = 1, g[1] = 2;
+    h[0] = h[1] = 1;
+
+    for(int i=2; i<100; i++){
+        f[i] = f[i - 1] + f[i - 2] + 2 * g[i - 2] + h[i - 2];
+        g[i] = f[i] + g[i - 1];
+        h[i] = f[i] + h[i - 2];
+    }
+
+    int t; cin>>t;
+    while(t--){
+        int n; cin>>n;
+        cout<<f[n]<<endl;
+    }
+}
+ signed main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
+
+    int t = 1;  //cin>>t;
+    while(t--){
+        test_case();
+        cout<<'\n';
+    }
+    return 0;
+}
+

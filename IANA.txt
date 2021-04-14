@@ -1,0 +1,39 @@
+#include "bits/stdc++.h"
+// #pragma GCC optimize("Ofast,unroll-loops")
+// #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,mmx,avx,avx2")
+using namespace std;
+using ll = long long;
+
+int main()
+{
+    ios::sync_with_stdio(0); cin.tie(0);
+    mt19937_64 rng(chrono::high_resolution_clock::now().time_since_epoch().count());
+
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        int n, k, m; cin >> n >> k >> m;
+        vector<vector<array<int, 2>>> g(n+m);
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < k; ++j) {
+                int x; cin >> x;
+                g[n+i].push_back({--x, 1});
+                g[x].push_back({n+i, 0});
+            }
+        }
+        deque<int> q;
+        vector<int> dist(n+m, n+m+5); q.push_front(0); dist[0] = 0;
+        while (!q.empty()) {
+            int u = q.front(); q.pop_front();
+            for (auto [v, d] : g[u]) {
+                if (dist[u]+d < dist[v]) {
+                    dist[v] = dist[u] + d;
+                    if (d == 1) q.push_back(v);
+                    else q.push_front(v);
+                }
+            }
+        }
+        if (dist[n-1] < n+m+5) cout << dist[n-1]+1 << '\n';
+        else cout << -1 << '\n';
+    }
+}

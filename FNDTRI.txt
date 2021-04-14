@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+ll find(ll a)
+{
+    return  (a*(a-1))/2;
+}
+int main()
+{
+    ll t;  cin>>t;
+
+    while(t--)
+    {
+        ll a,b;   cin>>a>>b;
+        ll ans =0;
+
+        if(a>=2)
+        {
+            ans+=b*find(a);
+        }
+        if(b>=2)
+        {
+            ans+=a*find(b);
+        }
+        cout<<ans<<endl;
+    }
+}

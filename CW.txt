@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long int lli;
+
+int main(){
+    lli t,m,n;
+    cin>>t;
+    string s;
+    int a[26];
+    memset(a,0,sizeof(a));
+    while(t--){
+        memset(a,0,sizeof(a));
+        cin>>s;
+        for(int i=0;i<s.length();i++){
+            if(a[int(s[i])-97]==0){
+                cout<<s[i];
+                a[int(s[i])-97]=1;
+            }
+        }
+        cout<<endl;
+    }
+    
+    
+}
